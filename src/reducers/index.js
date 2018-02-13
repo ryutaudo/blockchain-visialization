@@ -1,4 +1,4 @@
-defaultState = {
+const defaultState = {
 
 };
 
