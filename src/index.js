@@ -1,96 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import * as d3 from 'd3'
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createStore, compose, applyMiddleware } from 'redux';
+import reducer from './reducers/index';
+import App from './containers/App.js'
 
-const width = 960, height = 500, radius = Math.min(width, height) / 2;
-
-
-class App extends Component {
-  constructor(props){
-    super(props)
-    this.createLineChart = this.createLineChart.bind(this)
-  }
-
-  componentDidMount() {
-    this.createLineChart()
-  }
-  componentDidUpdate() {
-    this.createLineChart()
-  }
-
-  createLineChart() {
-    const node = this.node
-    var width = 500, height = 500, margin = 50,
-      x = d3.scaleLinear()
-        .domain([0, 10])
-        .range([margin, width - margin]),
-      y = d3.scaleLinear()
-        .domain([0, 10])
-        .range([height - margin, margin]);
-
-      d3.range(10).map(function(i){
-        return {x: i, y: Math.sin(i) + 5};
-      })
-
-    var line = d3.line()
-      .x(function(d){return x(d.x);})
-      .y(function(d){return y(d.y);});
-
-    var svg = d3.select(node)
-
-    svg.attr("height", height)
-      .attr("width", width);
-     
-    svg.selectAll("path")
-      .data([4,2,10,8])
-      .enter()
-      .append("path")
-      .attr("class", "line")            
-      .attr("d", function(d){return line(d);});
-
-    renderAxes(svg);
-
-    function renderAxes(svg){
-      var xAxis = d3.axisBottom()
-        .scale(x.range([0, quadrantWidth()]))
-        .scale(x); 
-
-      var yAxis = d3.axisLeft()
-        .scale(y.range([quadrantHeight(), 0]))
-        .scale(y);
-
-      svg.append("g")        
-        .attr("class", "axis")
-        .attr("transform", function(){
-          return "translate(" + xStart() 
-            + "," + yStart() + ")";
-        })
-        .call(xAxis);
-
-      svg.append("g")        
-        .attr("class", "axis")
-        .attr("transform", function(){
-          return "translate(" + xStart() 
-            + "," + yEnd() + ")";
-        })
-        .call(yAxis);
-    }
-
-    function xStart(){ return margin;}        
-    function yStart(){ return height - margin;}
-    function xEnd(){ return width - margin;}
-    function yEnd(){ return margin;}
-    function quadrantWidth(){ return width - 2 * margin;}
-    function quadrantHeight(){ return height - 2 * margin;} 
-  }
-
-  render() {
-    return (<svg ref={node => this.node = node}>
-    </svg>)
-  }
-}
+const createStoreWithMiddleware = compose(applyMiddleware(thunk))(createStore);
+const store = createStoreWithMiddleware(reducer)
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('app'),
-);
+  <Provider store={ store }>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+)
