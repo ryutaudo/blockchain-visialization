@@ -6,7 +6,14 @@ const getPrice = () => {
       const price = await getPricePromise();
       dispatch(getPriceSuccess(price));
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
   };
-};
+}
+
+const getPriceSuccess = (price) => ({
+  type: 'GET_SELLPRICE',
+  price,
+});
+
+export { getPrice };
