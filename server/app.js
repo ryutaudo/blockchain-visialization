@@ -22,13 +22,3 @@ if(process.env.NODE_ENV !== 'test') {
 }
 
 export default app;
-
-// app.get('/api/purchase', async (res, req) => {
-//   try {
-//     const purchases = await db.select().table('purchases');
-//     res.send(purchases);
-//   } catch(err) {
-//     console.erro('Error loading purchases!', err);
-//     res.send(500, 'internal server error');
-//   }
-// });
