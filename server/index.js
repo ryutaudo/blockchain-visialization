@@ -1,11 +1,12 @@
-const app = require('./app');
-const db = reqquire('./db');
+import app from './app';
+import db from './db';
+
 const PORT = process.env.PORT || 9000;
 
 (async () => {
   try {
-    console.log('Running migrations...');
-    await db.migrate.latest();
+    // console.log('Running migrations...');
+    // await db.migrate.latest();
 
     console.log('Starting express...');
     app.listen(PORT, () => {

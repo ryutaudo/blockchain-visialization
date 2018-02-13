@@ -10,11 +10,13 @@
   "author": "Yarn Contributor",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
+    "start": "babel-node server/index.js --presets es2015,stage-3",
     "hack": "react-scripts start",
     "build": "react-scripts build"
   },
   "dependencies": {
+    "babel-preset-stage-3": "^6.24.1",
+    "body-parser": "^1.18.2",
     "d3": "^4.13.0",
     "express": "^4.16.2",
     "knex": "^0.14.3",
@@ -29,6 +31,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-jest": "^22.1.0",
