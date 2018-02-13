@@ -1,4 +1,4 @@
-import { getPricePromise } from '../utils/index';
+import { getCPricePromise } from '../utils/index';
 
 const getPrice = () => {
   return async (dispatch) => {
@@ -12,7 +12,7 @@ const getPrice = () => {
 }
 
 const getPriceSuccess = (price) => ({
-  type: 'GET_SELLPRICE',
+  type: 'GET_PRICE',
   price,
 });
 
