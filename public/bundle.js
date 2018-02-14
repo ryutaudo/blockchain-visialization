@@ -21459,13 +21459,19 @@ exports.getPrice = getPrice;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 var getPricePromise = async function getPricePromise() {
-  var purchasesRes = await fetch('/api/purchases');
-  var purchases = await purchasesRes.json();
-  console.log(purchases, '@@@@@@@@@@@@');
+  var purchasesResponse = await fetch('/api/purchases');
+  var purchases = await purchasesResponse.json();
+  var pricePromises = purchases.map(function (purchase) {
+    return fetch('https://api.coinbase.com/v2/prices/' + purchase.base + '-' + purchase.currency + '/spot?date=' + purchase.purchased_at);
+  });
 
-  // return await (await fetch('https://api.coinbase.com/v2/prices/BTC-USD/sell')).json();
+  var priceResponses = await Promise.all(pricePromises);
+  var priceJsonPromises = priceResponses.map(function (res) {
+    return res.json();
+  });
+  var price = await Promise.all(priceJsonPromises);
+  console.log(price);
 };
 
 exports.getPricePromise = getPricePromise;

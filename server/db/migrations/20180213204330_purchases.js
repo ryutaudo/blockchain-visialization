@@ -12,7 +12,7 @@ exports.up = (knex, Promise) => {
         table.string('currency')
           .notNullable();
     
-        table.date('purchased_at')
+        table.string('purchased_at')
           .notNullable();
       });
     }
