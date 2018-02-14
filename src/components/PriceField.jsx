@@ -9,7 +9,6 @@ class PriceField extends Component {
 
   get currentPrice() {
     if(!this.props.price) return 'Loading...';
-    console.log(this.props.price.data);
     return (
       <div className="current-price">
         <p>{this.props.price.base}</p>

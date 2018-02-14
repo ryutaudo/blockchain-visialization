@@ -24,13 +24,21 @@ module.exports = {
   devtool: 'source-map',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build'),
-    publicPath: '/build',
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/public',
   },
   plugins: [
-    new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
+    new OpenBrowserPlugin({ url: 'http://localhost:3000' }),
   ],
   resolve: {
     extensions: ['.webpack.js', '.js', '.jsx'],
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "public"),
+    compress: true,
+    port: 3000,
+    proxy: {
+      "/api": "http://localhost:9000"
+    }
   },
 };

@@ -4,7 +4,6 @@ import bodyParser from 'body-parser';
 import path from 'path';
 
 import apiPurchaseRouter from './api/purchases/router';
-import db from './db/index';
 
 const app = express();
 
@@ -18,7 +17,11 @@ if(process.env.NODE_ENV !== 'test') {
   if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
   }
-  app.use('/', express.static(path.join(__dirname, '../build')));
 }
+
+app.use('/', express.static(path.join(__dirname, '../public')));
+app.all('*', function(req, res) {
+  res.redirect('/');
+});
 
 export default app;
