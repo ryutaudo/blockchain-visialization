@@ -1,15 +1,17 @@
 import { connect } from 'react-redux';
-import AddPurchase from '../components/AddPurchase';
+import Form from '../components/Form';
 import {
   selectYear,
   selectMonth,
   selectBase,
   selectCurrency,
   addPurchase,
+  updatePurchase,
 } from '../actions/index';
 
 
 const mapStateToProps = state => ({
+  currentView: state.currentView,
   selectedYear: state.selectedYear,
   selectedMonth: state.selectedMonth,
   selectedBase: state.selectedBase,
@@ -24,6 +26,9 @@ const mapDispatchToProps = dispatch => ({
   addPurchase: (year, month, base, currency) => {
     return dispatch(addPurchase(year, month, base, currency));
   },
+  updatePurchase: (year, month, base, currency) => {
+    return dispatch(updatePurchase(year, month, base, currency, id));
+  },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddPurchase);
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

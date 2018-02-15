@@ -4,6 +4,8 @@ const defaultState = {
   selectedMonth: undefined,
   selectedBase: undefined,
   selectedCurrency: undefined,
+  selectedPurchase: undefined,
+  currentView: 'AllPurchases',
 };
 
 const reducer = (state = defaultState, action) => {
@@ -11,6 +13,12 @@ const reducer = (state = defaultState, action) => {
     case 'GET_PRICE': {
       return Object.assign({}, state, {
         prices: action.prices,
+      });
+    }
+    case 'SELECT_PURCHASE': {
+      return Object.assign({}, state, {
+        currentView: 'SinglePurchase',
+        selectedPurchase: action.selectedPurchase
       });
     }
     case 'ADD_PURCHASE': {

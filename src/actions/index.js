@@ -1,5 +1,4 @@
 import { getPricePromise, savePurchase } from '../utils/index';
-import AddPurchase from '../containers/AddPurchase';
 
 const getPrice = () => {
   return async (dispatch) => {
@@ -56,6 +55,11 @@ const addPurchaseSuccess = () => ({
   type: 'ADD_PURCHASE',
 });
 
+const selectPurchase = (selectedPurchase) => ({
+  type: 'SELECT_PURCHASE',
+  selectedPurchase
+})
+
 export {
   getPrice,
   addPurchase,
@@ -63,4 +67,5 @@ export {
   selectMonth,
   selectBase,
   selectCurrency,
+  selectPurchase,
 };

@@ -14,7 +14,11 @@ class AllPurchases extends Component {
       <div className="price-container">
         {this.props.prices.map(price => {
           return (
-            <div className="price" key={price.id}>
+            <div
+              className="price"
+              key={price.id}
+              onClick={() => this.props.selectPurchase(price)}
+            >
               <p>{price.data.base}</p>
               <p>{price.data.amount} {price.data.currency}</p>
             </div>

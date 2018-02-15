@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import addPurchase from '../utils'
 
-class AddPurchase extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,7 +22,15 @@ class AddPurchase extends Component {
   
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addPurchase(
+    if(this.props.currentView === 'AllPurchases') {
+      this.props.addPurchase(
+        this.props.selectedYear,
+        this.props.selectedMonth,
+        this.props.selectedBase,
+        this.props.selectedCurrency,
+      );
+    }
+    this.props.updatePurchase(
       this.props.selectedYear,
       this.props.selectedMonth,
       this.props.selectedBase,
@@ -88,4 +96,4 @@ class AddPurchase extends Component {
   }
 }
 
-export default AddPurchase;
+export default Form;

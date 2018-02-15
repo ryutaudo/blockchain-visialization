@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import AllPurchases from '../components/AllPurchases';
-import { getPrice } from '../actions/index';
+import { getPrice, selectPurchase } from '../actions/index';
 
 const mapStateToProps = state => ({
   prices: state.prices,
@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getPrice: () => dispatch(getPrice()),
+  selectPurchase: (purchase) => dispatch(selectPurchase(purchase)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllPurchases);
