@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import PriceField from '../containers/PriceField';
-import AddPurchase from './AddPurchase';
+import AddPurchase from '../containers/AddPurchase';
 
 class App extends Component {
   render() {

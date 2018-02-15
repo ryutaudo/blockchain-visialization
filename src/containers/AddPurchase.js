@@ -4,7 +4,8 @@ import {
   selectYear,
   selectMonth,
   selectBase,
-  selectCurrency
+  selectCurrency,
+  addPurchase,
 } from '../actions/index';
 
 
@@ -20,6 +21,9 @@ const mapDispatchToProps = dispatch => ({
   selectMonth: (selectedMonth) => dispatch(selectMonth(selectedMonth)),
   selectBase: (selectedBase) => dispatch(selectBase(selectedBase)),
   selectCurrency: (selectedCurrency) => dispatch(selectCurrency(selectedCurrency)),
+  addPurchase: (year, month, base, currency) => {
+    return dispatch(addPurchase(year, month, base, currency));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddPurchase);

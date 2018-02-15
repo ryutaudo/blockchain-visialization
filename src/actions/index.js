@@ -1,4 +1,5 @@
-import { getPricePromise } from '../utils/index';
+import { getPricePromise, savePurchase } from '../utils/index';
+import AddPurchase from '../containers/AddPurchase';
 
 const getPrice = () => {
   return async (dispatch) => {
@@ -25,9 +26,9 @@ const selectMonth = (selectedMonth) => ({
   selectedMonth,
 });
 
-const selectBase = (selecteBase) => ({
+const selectBase = (selectedBase) => ({
   type: 'SELECT_BASE',
-  selecteBase,
+  selectedBase,
 });
 
 const selectCurrency = (selectedCurrency) => ({
@@ -35,4 +36,31 @@ const selectCurrency = (selectedCurrency) => ({
   selectedCurrency,
 });
 
-export { getPrice };
+const addPurchase = (year, month, base, currency) => {
+  return async (dispatch) => {
+    try {
+      const newPurhcase = {
+        base,
+        currency,
+        purchased_at: `${year}-${month}-01`
+      };
+      // await savePurchase();
+      dispatch(addPurchaseSuccess());
+    } catch(err) {
+      console.error(err);
+    }
+  };
+};
+
+const addPurchaseSuccess = () => ({
+  type: 'ADD_PURCHASE',
+});
+
+export {
+  getPrice,
+  addPurchase,
+  selectYear,
+  selectMonth,
+  selectBase,
+  selectCurrency,
+};
