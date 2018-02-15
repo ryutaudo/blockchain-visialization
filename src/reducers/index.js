@@ -38,6 +38,11 @@ const reducer = (state = defaultState, action) => {
         currentView: 'AllPurchases'
       });
     }
+    case 'DELETE_PURCHASE': {
+      return Object.assign({}, state, {
+        currentView: 'AllPurchases'
+      });
+    }
     case 'SELECT_YEAR': {
       return Object.assign({}, state, {
         selectedYear: action.selectedYear,

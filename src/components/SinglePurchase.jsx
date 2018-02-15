@@ -11,6 +11,13 @@ class SinglePurchase extends Component {
           <p>{this.props.selectedPurchase.data.amount} {this.props.selectedPurchase.data.currency}</p>
         </div>
         <Form />
+        <button
+          onClick={() => {
+            this.props.deletePurchase(this.props.selectedPurchase.id)
+          }}
+        >
+          Delete
+        </button>
       </div>
     );
   }

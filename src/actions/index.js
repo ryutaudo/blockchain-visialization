@@ -1,4 +1,4 @@
-import { getPricePromise, savePurchase, changePurchase } from '../utils/index';
+import { getPricePromise, savePurchase, changePurchase, delPurchase } from '../utils/index';
 
 const getPrice = () => {
   return async (dispatch) => {
@@ -80,6 +80,21 @@ const updatePurchaseSuccess = () => ({
   type: 'UPDATE_PURCHASE',
 });
 
+const deletePurchase = id => {
+  return async (dispatch) => {
+    try {
+      await delPurchase(id);
+      dispatch(deletePurchaseSuccess());
+    } catch(err) {
+      console.error(err);
+    }
+  };
+};
+
+const deletePurchaseSuccess = () => ({
+  type: 'DELETE_PURCHASE',
+});
+
 export {
   getPrice,
   addPurchase,
@@ -89,4 +104,5 @@ export {
   selectCurrency,
   selectPurchase,
   updatePurchase,
+  deletePurchase,
 };
