@@ -5,7 +5,10 @@ const send = (res, code, data, json = true) => {
 };
 
 const getPurchases = async (req, res) => {
-  const purchases = await db.select().table('purchases');
+  const purchases = await db
+  .table('purchases')
+  .orderBy('id')
+  .select();
   send(res, 200, purchases, false)
 }
 
@@ -17,12 +20,12 @@ const addPurchase = async (req, res) => {
 
 const updatePurchase = async (req, res) => {
   const newPurchase = req.body;
-  const { id } = req.pramas;
-  const result = await db
-    .table('purchase')
+  const { id } = req.params;
+  const updateResult = await db
+    .table('purchases')
     .where({ id })
     .update(newPurchase);
-  send(res, 200, result, false);
+  send(res, 200, updateResult, false);
 }
 
 export { getPurchases, addPurchase, updatePurchase };

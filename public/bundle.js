@@ -1943,7 +1943,7 @@ function verifyPlainObject(value, displayName, methodName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectPurchase = exports.selectCurrency = exports.selectBase = exports.selectMonth = exports.selectYear = exports.addPurchase = exports.getPrice = undefined;
+exports.updatePurchase = exports.selectPurchase = exports.selectCurrency = exports.selectBase = exports.selectMonth = exports.selectYear = exports.addPurchase = exports.getPrice = undefined;
 
 var _index = __webpack_require__(30);
 
@@ -2021,6 +2021,28 @@ var selectPurchase = function selectPurchase(selectedPurchase) {
   };
 };
 
+var updatePurchase = function updatePurchase(year, month, base, currency, id) {
+  return async function (dispatch) {
+    try {
+      var newPurchase = {
+        base: base,
+        currency: currency,
+        purchased_at: year + '-' + month + '-01'
+      };
+      await (0, _index.changePurchase)(newPurchase, id);
+      dispatch(updatePurchaseSuccess());
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
+var updatePurchaseSuccess = function updatePurchaseSuccess() {
+  return {
+    type: 'UPDATE_PURCHASE'
+  };
+};
+
 exports.getPrice = getPrice;
 exports.addPurchase = addPurchase;
 exports.selectYear = selectYear;
@@ -2028,6 +2050,7 @@ exports.selectMonth = selectMonth;
 exports.selectBase = selectBase;
 exports.selectCurrency = selectCurrency;
 exports.selectPurchase = selectPurchase;
+exports.updatePurchase = updatePurchase;
 
 /***/ }),
 /* 30 */
@@ -2068,8 +2091,19 @@ var savePurchase = function savePurchase(purchase) {
   });
 };
 
+var changePurchase = function changePurchase(purchase, id) {
+  fetch('/api/purchases/' + id, {
+    method: 'PUT',
+    body: JSON.stringify(purchase),
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  });
+};
+
 exports.getPricePromise = getPricePromise;
 exports.savePurchase = savePurchase;
+exports.changePurchase = changePurchase;
 
 /***/ }),
 /* 31 */
@@ -2098,7 +2132,8 @@ var mapStateToProps = function mapStateToProps(state) {
     selectedYear: state.selectedYear,
     selectedMonth: state.selectedMonth,
     selectedBase: state.selectedBase,
-    selectedCurrency: state.selectedCurrency
+    selectedCurrency: state.selectedCurrency,
+    selectedPurchase: state.selectedPurchase
   };
 };
 
@@ -2119,7 +2154,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     addPurchase: function addPurchase(year, month, base, currency) {
       return dispatch((0, _index.addPurchase)(year, month, base, currency));
     },
-    updatePurchase: function updatePurchase(year, month, base, currency) {
+    updatePurchase: function updatePurchase(year, month, base, currency, id) {
       return dispatch((0, _index.updatePurchase)(year, month, base, currency, id));
     }
   };
@@ -21422,6 +21457,16 @@ var reducer = function reducer() {
           selectedCurrency: undefined
         });
       }
+    case 'UPDATE_PURCHASE':
+      {
+        return Object.assign({}, state, {
+          selectedYear: undefined,
+          selectedMonth: undefined,
+          selectedBase: undefined,
+          selectedCurrency: undefined,
+          currentView: 'AllPurchases'
+        });
+      }
     case 'SELECT_YEAR':
       {
         return Object.assign({}, state, {
@@ -21537,6 +21582,7 @@ var App = function (_Component) {
         'div',
         { className: 'App' },
         'App',
+        _react2.default.createElement(_Form2.default, null),
         this.currentView
       );
     }
@@ -21658,7 +21704,6 @@ var AllPurchases = function (_Component) {
       var _this2 = this;
 
       if (!this.props.prices.length === 0) return 'Loading...';
-      console.log(this.props.prices);
       return _react2.default.createElement(
         'div',
         { className: 'price-container' },
@@ -21757,7 +21802,7 @@ var Form = function (_Component) {
       if (this.props.currentView === 'AllPurchases') {
         this.props.addPurchase(this.props.selectedYear, this.props.selectedMonth, this.props.selectedBase, this.props.selectedCurrency);
       }
-      this.props.updatePurchase(this.props.selectedYear, this.props.selectedMonth, this.props.selectedBase, this.props.selectedCurrency);
+      this.props.updatePurchase(this.props.selectedYear, this.props.selectedMonth, this.props.selectedBase, this.props.selectedCurrency, this.props.selectedPurchase.id);
     }
   }, {
     key: 'render',
@@ -22020,7 +22065,6 @@ var SinglePurchase = function (_Component) {
   _createClass(SinglePurchase, [{
     key: 'render',
     value: function render() {
-      console.log(this.props.selectedPurchase);
       return _react2.default.createElement(
         'div',
         { className: 'SinglePurchase' },

@@ -9,7 +9,6 @@ class AllPurchases extends Component {
 
   get currentPrice() {
     if(!this.props.prices.length === 0) return 'Loading...';
-    console.log(this.props.prices);
     return (
       <div className="price-container">
         {this.props.prices.map(price => {

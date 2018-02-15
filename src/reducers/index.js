@@ -29,6 +29,15 @@ const reducer = (state = defaultState, action) => {
         selectedCurrency: undefined,
       });
     }
+    case 'UPDATE_PURCHASE': {
+      return Object.assign({}, state, {
+        selectedYear: undefined,
+        selectedMonth: undefined,
+        selectedBase: undefined,
+        selectedCurrency: undefined,
+        currentView: 'AllPurchases'
+      });
+    }
     case 'SELECT_YEAR': {
       return Object.assign({}, state, {
         selectedYear: action.selectedYear,

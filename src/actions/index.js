@@ -69,7 +69,7 @@ const updatePurchase = (year, month, base, currency, id) => {
         purchased_at: `${year}-${month}-01`
       };
       await changePurchase(newPurchase, id);
-      dispatch(upatePurchaseSuccess());
+      dispatch(updatePurchaseSuccess());
     } catch(err) {
       console.error(err);
     }
@@ -88,4 +88,5 @@ export {
   selectBase,
   selectCurrency,
   selectPurchase,
+  updatePurchase,
 };

@@ -16,6 +16,7 @@ class App extends Component {
     return (
       <div className="App">
       App
+      <Form />
       {this.currentView}
       </div>
     );

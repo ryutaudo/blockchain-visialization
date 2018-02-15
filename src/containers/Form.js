@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
   addPurchase: (year, month, base, currency) => {
     return dispatch(addPurchase(year, month, base, currency));
   },
-  updatePurchase: (year, month, base, currency) => {
+  updatePurchase: (year, month, base, currency, id) => {
     return dispatch(updatePurchase(year, month, base, currency, id));
   },
 });
