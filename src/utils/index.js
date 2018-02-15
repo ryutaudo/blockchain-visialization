@@ -9,6 +9,10 @@ const getPricePromise = async () => {
   const priceResponses = await Promise.all(pricePromises)
   const priceJsonPromises = priceResponses.map(res => res.json());
   const prices = await Promise.all(priceJsonPromises);
+  const pricesWithId = prices.map((price, index) => {
+    price.id = purchases[index].id;
+    return price;
+  });
   return prices;
 };
 

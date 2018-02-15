@@ -2049,6 +2049,10 @@ var getPricePromise = async function getPricePromise() {
     return res.json();
   });
   var prices = await Promise.all(priceJsonPromises);
+  var pricesWithId = prices.map(function (price, index) {
+    price.id = purchases[index].id;
+    return price;
+  });
   return prices;
 };
 
@@ -21476,9 +21480,9 @@ var _propTypes = __webpack_require__(5);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _PriceField = __webpack_require__(75);
+var _AllPurchases = __webpack_require__(75);
 
-var _PriceField2 = _interopRequireDefault(_PriceField);
+var _AllPurchases2 = _interopRequireDefault(_AllPurchases);
 
 var _AddPurchase = __webpack_require__(31);
 
@@ -21509,7 +21513,7 @@ var App = function (_Component) {
         { className: 'App' },
         'App',
         _react2.default.createElement(_AddPurchase2.default, null),
-        _react2.default.createElement(_PriceField2.default, null)
+        _react2.default.createElement(_AllPurchases2.default, null)
       );
     }
   }]);
@@ -21532,9 +21536,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = __webpack_require__(8);
 
-var _PriceField = __webpack_require__(76);
+var _AllPurchases = __webpack_require__(76);
 
-var _PriceField2 = _interopRequireDefault(_PriceField);
+var _AllPurchases2 = _interopRequireDefault(_AllPurchases);
 
 var _index = __webpack_require__(29);
 
@@ -21554,7 +21558,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_PriceField2.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_AllPurchases2.default);
 
 /***/ }),
 /* 76 */
@@ -21585,16 +21589,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PriceField = function (_Component) {
-  _inherits(PriceField, _Component);
+var AllPurchases = function (_Component) {
+  _inherits(AllPurchases, _Component);
 
-  function PriceField() {
-    _classCallCheck(this, PriceField);
+  function AllPurchases() {
+    _classCallCheck(this, AllPurchases);
 
-    return _possibleConstructorReturn(this, (PriceField.__proto__ || Object.getPrototypeOf(PriceField)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AllPurchases.__proto__ || Object.getPrototypeOf(AllPurchases)).apply(this, arguments));
   }
 
-  _createClass(PriceField, [{
+  _createClass(AllPurchases, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.props.getPrice();
@@ -21602,11 +21606,10 @@ var PriceField = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.prices);
       return _react2.default.createElement(
         'div',
-        { className: 'PriceField' },
-        'PriceField',
+        { className: 'AllPurchases' },
+        'AllPurchases',
         _react2.default.createElement(
           'div',
           { className: 'price' },
@@ -21618,13 +21621,14 @@ var PriceField = function (_Component) {
     key: 'currentPrice',
     get: function get() {
       if (!this.props.prices.length === 0) return 'Loading...';
+      console.log(this.props.prices);
       return _react2.default.createElement(
         'div',
         { className: 'price-container' },
         this.props.prices.map(function (price) {
           return _react2.default.createElement(
             'div',
-            { className: 'price' },
+            { className: 'price', key: price.id },
             _react2.default.createElement(
               'p',
               null,
@@ -21643,10 +21647,10 @@ var PriceField = function (_Component) {
     }
   }]);
 
-  return PriceField;
+  return AllPurchases;
 }(_react.Component);
 
-exports.default = PriceField;
+exports.default = AllPurchases;
 
 /***/ }),
 /* 77 */
@@ -21712,10 +21716,6 @@ var AddPurchase = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.props.selectedYear);
-      console.log(this.props.selectedMonth);
-      console.log(this.props.selectedBase);
-      console.log(this.props.selectedCurrency);
       return _react2.default.createElement(
         'form',
         { onSubmit: this.handleSubmit },
