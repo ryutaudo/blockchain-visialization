@@ -1,4 +1,4 @@
-import { getPricePromise, savePurchase } from '../utils/index';
+import { getPricePromise, savePurchase, changePurchase } from '../utils/index';
 
 const getPrice = () => {
   return async (dispatch) => {
@@ -58,7 +58,27 @@ const addPurchaseSuccess = () => ({
 const selectPurchase = (selectedPurchase) => ({
   type: 'SELECT_PURCHASE',
   selectedPurchase
-})
+});
+
+const updatePurchase = (year, month, base, currency, id) => {
+  return async (dispatch) => {
+    try {
+      const newPurchase = {
+        base,
+        currency,
+        purchased_at: `${year}-${month}-01`
+      };
+      await changePurchase(newPurchase, id);
+      dispatch(upatePurchaseSuccess());
+    } catch(err) {
+      console.error(err);
+    }
+  };
+};
+
+const updatePurchaseSuccess = () => ({
+  type: 'UPDATE_PURCHASE',
+});
 
 export {
   getPrice,

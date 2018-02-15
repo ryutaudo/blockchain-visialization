@@ -35,6 +35,7 @@ class Form extends Component {
       this.props.selectedMonth,
       this.props.selectedBase,
       this.props.selectedCurrency,
+      this.props.selectedPurchase.id,
     );
   }
 

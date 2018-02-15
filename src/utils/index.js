@@ -26,4 +26,14 @@ const savePurchase = (purchase) => {
   });
 }
 
-export { getPricePromise, savePurchase };
+const changePurchase = (purchase, id) => {
+  fetch(`/api/purchases/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(purchase), 
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+  });
+}
+
+export { getPricePromise, savePurchase, changePurchase };

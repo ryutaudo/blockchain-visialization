@@ -16,6 +16,7 @@ const mapStateToProps = state => ({
   selectedMonth: state.selectedMonth,
   selectedBase: state.selectedBase,
   selectedCurrency: state.selectedCurrency,
+  selectedPurchase: state.selectedPurchase,
 });
 
 const mapDispatchToProps = dispatch => ({
