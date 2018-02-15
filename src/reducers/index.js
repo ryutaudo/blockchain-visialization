@@ -1,5 +1,9 @@
 const defaultState = {
   prices: [],
+  selectedYear: undefined,
+  selectedMonth: undefined,
+  selectedBase: undefined,
+  selectedCurrency: undefined,
 };
 
 const reducer = (state = defaultState, action) => {
@@ -7,6 +11,26 @@ const reducer = (state = defaultState, action) => {
     case 'GET_PRICE': {
       return Object.assign({}, state, {
         prices: action.prices,
+      });
+    }
+    case 'SELECT_YEAR': {
+      return Object.assign({}, state, {
+        selectedYear: action.selectedYear,
+      });
+    }
+    case 'SELECT_MONTH': {
+      return Object.assign({}, state, {
+        selectedDate: action.selectedDate,
+      });
+    }
+    case 'SELECT_BASE': {
+      return Object.assign({}, state, {
+        selectedBase: action.selectedBase,
+      });
+    }
+    case 'SELECT_CURRENCY': {
+      return Object.assign({}, state, {
+        selectedCurrency: action.selectedCurrency,
       });
     }
     default:
