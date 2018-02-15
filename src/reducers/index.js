@@ -14,7 +14,6 @@ const reducer = (state = defaultState, action) => {
       });
     }
     case 'ADD_PURCHASE': {
-      console.log(state)
       return Object.assign({}, state, {
         selectedYear: undefined,
         selectedMonth: undefined,

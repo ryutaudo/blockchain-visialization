@@ -12,7 +12,6 @@ class PriceField extends Component {
     return (
       <div className="price-container">
         {this.props.prices.map(price => {
-          console.log(price)
           return (
             <div className="price">
               <p>{price.data.base}</p>

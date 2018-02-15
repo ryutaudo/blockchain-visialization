@@ -12,4 +12,14 @@ const getPricePromise = async () => {
   return prices;
 };
 
-export { getPricePromise };
+const savePurchase = (purhcase) => {
+  fetch('/api/purchases', {
+    method: 'POST',
+    body: JSON.stringify(purchase), 
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+  });
+}
+
+export { getPricePromise, savePurchase };

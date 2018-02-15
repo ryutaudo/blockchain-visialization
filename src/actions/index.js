@@ -44,7 +44,7 @@ const addPurchase = (year, month, base, currency) => {
         currency,
         purchased_at: `${year}-${month}-01`
       };
-      // await savePurchase();
+      savePurchase(newPurhcase);
       dispatch(addPurchaseSuccess());
     } catch(err) {
       console.error(err);
