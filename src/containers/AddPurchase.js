@@ -11,7 +11,7 @@ import {
 
 const mapStateToProps = state => ({
   selectedYear: state.selectedYear,
-  selectedMonth: state.selectedDate,
+  selectedMonth: state.selectedMonth,
   selectedBase: state.selectedBase,
   selectedCurrency: state.selectedCurrency,
 });

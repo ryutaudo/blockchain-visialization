@@ -12,7 +12,7 @@ const getPricePromise = async () => {
   return prices;
 };
 
-const savePurchase = (purhcase) => {
+const savePurchase = (purchase) => {
   fetch('/api/purchases', {
     method: 'POST',
     body: JSON.stringify(purchase), 

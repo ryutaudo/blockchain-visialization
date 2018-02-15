@@ -2001,12 +2001,12 @@ var selectCurrency = function selectCurrency(selectedCurrency) {
 var addPurchase = function addPurchase(year, month, base, currency) {
   return async function (dispatch) {
     try {
-      var newPurhcase = {
+      var newPurchase = {
         base: base,
         currency: currency,
         purchased_at: year + '-' + month + '-01'
       };
-      // await savePurchase();
+      await (0, _index.savePurchase)(newPurchase);
       dispatch(addPurchaseSuccess());
     } catch (err) {
       console.error(err);
@@ -2052,7 +2052,18 @@ var getPricePromise = async function getPricePromise() {
   return prices;
 };
 
+var savePurchase = function savePurchase(purchase) {
+  fetch('/api/purchases', {
+    method: 'POST',
+    body: JSON.stringify(purchase),
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  });
+};
+
 exports.getPricePromise = getPricePromise;
+exports.savePurchase = savePurchase;
 
 /***/ }),
 /* 31 */
@@ -2078,7 +2089,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state) {
   return {
     selectedYear: state.selectedYear,
-    selectedMonth: state.selectedDate,
+    selectedMonth: state.selectedMonth,
     selectedBase: state.selectedBase,
     selectedCurrency: state.selectedCurrency
   };
@@ -21385,7 +21396,6 @@ var reducer = function reducer() {
       }
     case 'ADD_PURCHASE':
       {
-        console.log(state);
         return Object.assign({}, state, {
           selectedYear: undefined,
           selectedMonth: undefined,
@@ -21592,6 +21602,7 @@ var PriceField = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log(this.prices);
       return _react2.default.createElement(
         'div',
         { className: 'PriceField' },
@@ -21611,7 +21622,6 @@ var PriceField = function (_Component) {
         'div',
         { className: 'price-container' },
         this.props.prices.map(function (price) {
-          console.log(price);
           return _react2.default.createElement(
             'div',
             { className: 'price' },
@@ -21697,11 +21707,15 @@ var AddPurchase = function (_Component) {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      this.props.addPurchase(this.props.selectYear, this.props.selectMonth, this.props.selectBase, this.props.selectCurrency);
+      this.props.addPurchase(this.props.selectedYear, this.props.selectedMonth, this.props.selectedBase, this.props.selectedCurrency);
     }
   }, {
     key: 'render',
     value: function render() {
+      console.log(this.props.selectedYear);
+      console.log(this.props.selectedMonth);
+      console.log(this.props.selectedBase);
+      console.log(this.props.selectedCurrency);
       return _react2.default.createElement(
         'form',
         { onSubmit: this.handleSubmit },
@@ -21711,7 +21725,12 @@ var AddPurchase = function (_Component) {
           'Year:',
           _react2.default.createElement(
             'select',
-            { name: 'year', onChange: this.handleChange },
+            { name: 'year', onChange: this.handleChange, defaultValue: '' },
+            _react2.default.createElement(
+              'option',
+              { value: '', disabled: true },
+              'Select a year'
+            ),
             _react2.default.createElement(
               'option',
               { value: '2013' },
@@ -21750,7 +21769,12 @@ var AddPurchase = function (_Component) {
           'Month:',
           _react2.default.createElement(
             'select',
-            { name: 'month', onChange: this.handleChange },
+            { name: 'month', onChange: this.handleChange, defaultValue: '' },
+            _react2.default.createElement(
+              'option',
+              { value: '', disabled: true },
+              'Select a month'
+            ),
             _react2.default.createElement(
               'option',
               { value: '01' },
@@ -21820,7 +21844,12 @@ var AddPurchase = function (_Component) {
           'Base:',
           _react2.default.createElement(
             'select',
-            { name: 'base', onChange: this.handleChange },
+            { name: 'base', onChange: this.handleChange, defaultValue: '' },
+            _react2.default.createElement(
+              'option',
+              { value: '', disabled: true },
+              'Select a base'
+            ),
             _react2.default.createElement(
               'option',
               { value: 'BTC' },
@@ -21844,7 +21873,12 @@ var AddPurchase = function (_Component) {
           'Currency:',
           _react2.default.createElement(
             'select',
-            { name: 'currency', onChange: this.handleChange },
+            { name: 'currency', onChange: this.handleChange, defaultValue: '' },
+            _react2.default.createElement(
+              'option',
+              { value: '', disabled: true },
+              'Select a currency'
+            ),
             _react2.default.createElement(
               'option',
               { value: 'USD' },

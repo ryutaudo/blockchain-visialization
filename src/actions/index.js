@@ -39,12 +39,12 @@ const selectCurrency = (selectedCurrency) => ({
 const addPurchase = (year, month, base, currency) => {
   return async (dispatch) => {
     try {
-      const newPurhcase = {
+      const newPurchase = {
         base,
         currency,
         purchased_at: `${year}-${month}-01`
       };
-      savePurchase(newPurhcase);
+      await savePurchase(newPurchase);
       dispatch(addPurchaseSuccess());
     } catch(err) {
       console.error(err);

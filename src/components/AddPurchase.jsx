@@ -23,10 +23,10 @@ class AddPurchase extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.addPurchase(
-      this.props.selectYear,
-      this.props.selectMonth,
-      this.props.selectBase,
-      this.props.selectCurrency,
+      this.props.selectedYear,
+      this.props.selectedMonth,
+      this.props.selectedBase,
+      this.props.selectedCurrency,
     );
   }
 
@@ -35,7 +35,8 @@ class AddPurchase extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Year:
-          <select name="year" onChange={this.handleChange}>
+          <select name="year" onChange={this.handleChange} defaultValue="">
+            <option value="" disabled>Select a year</option>
             <option value="2013">2013</option>
             <option value="2014">2014</option>
             <option value="2015">2015</option>
@@ -46,7 +47,8 @@ class AddPurchase extends Component {
         </label>
         <label>
           Month:
-          <select name="month" onChange={this.handleChange}>
+          <select name="month" onChange={this.handleChange} defaultValue="">
+            <option value="" disabled>Select a month</option>
             <option value="01">1</option>
             <option value="02">2</option>
             <option value="03">3</option>
@@ -64,7 +66,8 @@ class AddPurchase extends Component {
         <br />
         <label>
           Base:
-          <select name="base" onChange={this.handleChange}>
+          <select name="base" onChange={this.handleChange} defaultValue="">
+            <option value="" disabled>Select a base</option>
             <option value="BTC">BTC</option>
             <option value="ETH">ETH</option>
             <option value="LTC">LTC</option>
@@ -72,7 +75,8 @@ class AddPurchase extends Component {
         </label>
         <label>
           Currency:
-          <select name="currency" onChange={this.handleChange}>
+          <select name="currency" onChange={this.handleChange} defaultValue="">
+            <option value="" disabled>Select a currency</option>
             <option value="USD">USD</option>
             <option value="JPY">JPY</option>
           </select>

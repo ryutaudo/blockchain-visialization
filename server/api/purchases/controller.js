@@ -5,8 +5,14 @@ const send = (res, code, data, json = true) => {
 };
 
 const getPurchases = async (req, res) => {
-  const purhcases = await db.select().table('purchases');
-  send(res, 200, purhcases, false)
+  const purchases = await db.select().table('purchases');
+  send(res, 200, purchases, false)
 }
 
-export { getPurchases };
+const addPurchase = async (req, res) => {
+  const newPurchase = req.body;
+  const result = await db.insert(newPurchase).into('purchases');
+  send(res, 200, result, false);
+}
+
+export { getPurchases, addPurchase };
