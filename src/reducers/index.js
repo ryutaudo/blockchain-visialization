@@ -1,5 +1,5 @@
 const defaultState = {
-  prices: null,
+  prices: [],
 };
 
 const reducer = (state = defaultState, action) => {

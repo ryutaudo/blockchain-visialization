@@ -8,7 +8,7 @@ class PriceField extends Component {
   }
 
   get currentPrice() {
-    if(!this.props.prices) return 'Loading...';
+    if(!this.props.prices.length === 0) return 'Loading...';
     return (
       <div className="price-container">
         {this.props.prices.map(price => {
