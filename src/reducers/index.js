@@ -1,12 +1,12 @@
 const defaultState = {
-  price: null,
+  prices: null,
 };
 
 const reducer = (state = defaultState, action) => {
   switch(action.type) {
     case 'GET_PRICE': {
       return Object.assign({}, state, {
-        price: action.price,
+        prices: action.prices,
       });
     }
     default:

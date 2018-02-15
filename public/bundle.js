@@ -21192,7 +21192,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var defaultState = {
-  price: null
+  prices: null
 };
 
 var reducer = function reducer() {
@@ -21203,7 +21203,7 @@ var reducer = function reducer() {
     case 'GET_PRICE':
       {
         return Object.assign({}, state, {
-          price: action.price
+          prices: action.prices
         });
       }
     default:
@@ -21316,7 +21316,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    price: state.price
+    prices: state.prices
   };
 };
 
@@ -21390,22 +21390,29 @@ var PriceField = function (_Component) {
   }, {
     key: 'currentPrice',
     get: function get() {
-      if (!this.props.price) return 'Loading...';
+      if (!this.props.prices) return 'Loading...';
       return _react2.default.createElement(
         'div',
-        { className: 'current-price' },
-        _react2.default.createElement(
-          'p',
-          null,
-          this.props.price.base
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
-          this.props.price.amount,
-          ' ',
-          this.props.price.currency
-        )
+        { className: 'price-container' },
+        this.props.prices.map(function (price) {
+          console.log(price);
+          return _react2.default.createElement(
+            'div',
+            { className: 'price' },
+            _react2.default.createElement(
+              'p',
+              null,
+              price.data.base
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              price.data.amount,
+              ' ',
+              price.data.currency
+            )
+          );
+        })
       );
     }
   }]);
@@ -21432,18 +21439,18 @@ var _index = __webpack_require__(75);
 var getPrice = function getPrice() {
   return async function (dispatch) {
     try {
-      var price = await (0, _index.getPricePromise)();
-      dispatch(getPriceSuccess(price.data));
+      var prices = await (0, _index.getPricePromise)();
+      dispatch(getPriceSuccess(prices));
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 };
 
-var getPriceSuccess = function getPriceSuccess(price) {
+var getPriceSuccess = function getPriceSuccess(prices) {
   return {
     type: 'GET_PRICE',
-    price: price
+    prices: prices
   };
 };
 
@@ -21470,8 +21477,8 @@ var getPricePromise = async function getPricePromise() {
   var priceJsonPromises = priceResponses.map(function (res) {
     return res.json();
   });
-  var price = await Promise.all(priceJsonPromises);
-  console.log(price);
+  var prices = await Promise.all(priceJsonPromises);
+  return prices;
 };
 
 exports.getPricePromise = getPricePromise;

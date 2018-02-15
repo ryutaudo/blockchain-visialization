@@ -8,11 +8,18 @@ class PriceField extends Component {
   }
 
   get currentPrice() {
-    if(!this.props.price) return 'Loading...';
+    if(!this.props.prices) return 'Loading...';
     return (
-      <div className="current-price">
-        <p>{this.props.price.base}</p>
-        <p>{this.props.price.amount} {this.props.price.currency}</p>
+      <div className="price-container">
+        {this.props.prices.map(price => {
+          console.log(price)
+          return (
+            <div className="price">
+              <p>{price.data.base}</p>
+              <p>{price.data.amount} {price.data.currency}</p>
+            </div>
+          );
+        })}
       </div>
     );
   }

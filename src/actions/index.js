@@ -3,17 +3,17 @@ import { getPricePromise } from '../utils/index';
 const getPrice = () => {
   return async (dispatch) => {
     try {
-      const price = await getPricePromise();
-      dispatch(getPriceSuccess(price.data));
+      const prices = await getPricePromise();
+      dispatch(getPriceSuccess(prices));
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   };
 }
 
-const getPriceSuccess = (price) => ({
+const getPriceSuccess = (prices) => ({
   type: 'GET_PRICE',
-  price,
+  prices,
 });
 
 export { getPrice };

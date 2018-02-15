@@ -3,7 +3,7 @@ import PriceField from '../components/PriceField';
 import { getPrice } from '../actions/index';
 
 const mapStateToProps = state => ({
-  price: state.price,
+  prices: state.prices,
 });
 
 const mapDispatchToProps = dispatch => ({
