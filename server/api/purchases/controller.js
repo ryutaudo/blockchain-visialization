@@ -15,4 +15,14 @@ const addPurchase = async (req, res) => {
   send(res, 200, result, false);
 }
 
-export { getPurchases, addPurchase };
+const updatePurchase = async (req, res) => {
+  const newPurchase = req.body;
+  const { id } = req.pramas;
+  const result = await db
+    .table('purchase')
+    .where({ id })
+    .update(newPurchase);
+  send(res, 200, result, false);
+}
+
+export { getPurchases, addPurchase, updatePurchase };
