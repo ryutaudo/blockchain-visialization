@@ -95,6 +95,10 @@ const deletePurchaseSuccess = () => ({
   type: 'DELETE_PURCHASE',
 });
 
+const goAddForm = () => ({
+  type: 'GO_ADDFORM',
+});
+
 export {
   getPrice,
   addPurchase,
@@ -105,4 +109,5 @@ export {
   selectPurchase,
   updatePurchase,
   deletePurchase,
+  goAddForm,
 };

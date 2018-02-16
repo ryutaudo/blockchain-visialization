@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Form from '../components/Form';
+import PurchaseForm from '../components/PurchaseForm';
 import {
   selectYear,
   selectMonth,
@@ -32,4 +32,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(PurchaseForm);

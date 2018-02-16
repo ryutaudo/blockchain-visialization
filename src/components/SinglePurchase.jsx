@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import Form from '../containers/Form'
+import { Button } from 'reactstrap';
+import PurchaseForm from '../containers/PurchaseForm'
 
 class SinglePurchase extends Component {
   render() {
@@ -10,14 +11,14 @@ class SinglePurchase extends Component {
           <p>{this.props.selectedPurchase.data.base}</p>
           <p>{this.props.selectedPurchase.data.amount} {this.props.selectedPurchase.data.currency}</p>
         </div>
-        <Form />
-        <button
+        <PurchaseForm />
+        <Button
           onClick={() => {
             this.props.deletePurchase(this.props.selectedPurchase.id)
           }}
         >
           Delete
-        </button>
+        </Button>
       </div>
     );
   }

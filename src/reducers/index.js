@@ -27,6 +27,7 @@ const reducer = (state = defaultState, action) => {
         selectedMonth: undefined,
         selectedBase: undefined,
         selectedCurrency: undefined,
+        currentView: 'AllPurchases',
       });
     }
     case 'UPDATE_PURCHASE': {
@@ -35,7 +36,7 @@ const reducer = (state = defaultState, action) => {
         selectedMonth: undefined,
         selectedBase: undefined,
         selectedCurrency: undefined,
-        currentView: 'AllPurchases'
+        currentView: 'AllPurchases',
       });
     }
     case 'DELETE_PURCHASE': {
@@ -61,6 +62,11 @@ const reducer = (state = defaultState, action) => {
     case 'SELECT_CURRENCY': {
       return Object.assign({}, state, {
         selectedCurrency: action.selectedCurrency,
+      });
+    }
+    case 'GO_ADDFORM': {
+      return Object.assign({}, state, {
+        currentView: 'AddPurchase',
       });
     }
     default:
