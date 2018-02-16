@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import Form from '../containers/Form';
 
 class AllPurchases extends Component {
 
@@ -11,6 +12,7 @@ class AllPurchases extends Component {
     if(!this.props.prices.length === 0) return 'Loading...';
     return (
       <div className="price-container">
+        <Form />
         {this.props.prices.map(price => {
           return (
             <div
