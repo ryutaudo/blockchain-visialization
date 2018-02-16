@@ -28,4 +28,13 @@ const updatePurchase = async (req, res) => {
   send(res, 200, updateResult, false);
 }
 
-export { getPurchases, addPurchase, updatePurchase };
+const deletePurchase = async (req, res) => {
+  const { id } = req.params;
+  const deleteResult = await db
+    .table('purchases')
+    .where({ id })
+    .delete();
+  send(res, 200, updateResult, false);
+}
+
+export { getPurchases, addPurchase, updatePurchase, deletePurchase };
