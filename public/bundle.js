@@ -509,7 +509,7 @@ module.exports = invariant;
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connect_connect__ = __webpack_require__(50);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createProvider", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
@@ -805,6 +805,143 @@ function isPlainObject(value) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deletePurchase = exports.updatePurchase = exports.selectPurchase = exports.selectCurrency = exports.selectBase = exports.selectMonth = exports.selectYear = exports.addPurchase = exports.getPrice = undefined;
+
+var _index = __webpack_require__(30);
+
+var getPrice = function getPrice() {
+  return async function (dispatch) {
+    try {
+      var prices = await (0, _index.getPricePromise)();
+      dispatch(getPriceSuccess(prices));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
+var getPriceSuccess = function getPriceSuccess(prices) {
+  return {
+    type: 'GET_PRICE',
+    prices: prices
+  };
+};
+
+var selectYear = function selectYear(selectedYear) {
+  return {
+    type: 'SELECT_YEAR',
+    selectedYear: selectedYear
+  };
+};
+var selectMonth = function selectMonth(selectedMonth) {
+  return {
+    type: 'SELECT_MONTH',
+    selectedMonth: selectedMonth
+  };
+};
+
+var selectBase = function selectBase(selectedBase) {
+  return {
+    type: 'SELECT_BASE',
+    selectedBase: selectedBase
+  };
+};
+
+var selectCurrency = function selectCurrency(selectedCurrency) {
+  return {
+    type: 'SELECT_CURRENCY',
+    selectedCurrency: selectedCurrency
+  };
+};
+
+var addPurchase = function addPurchase(year, month, base, currency) {
+  return async function (dispatch) {
+    try {
+      var newPurchase = {
+        base: base,
+        currency: currency,
+        purchased_at: year + '-' + month + '-01'
+      };
+      await (0, _index.savePurchase)(newPurchase);
+      dispatch(addPurchaseSuccess());
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
+var addPurchaseSuccess = function addPurchaseSuccess() {
+  return {
+    type: 'ADD_PURCHASE'
+  };
+};
+
+var selectPurchase = function selectPurchase(selectedPurchase) {
+  return {
+    type: 'SELECT_PURCHASE',
+    selectedPurchase: selectedPurchase
+  };
+};
+
+var updatePurchase = function updatePurchase(year, month, base, currency, id) {
+  return async function (dispatch) {
+    try {
+      var newPurchase = {
+        base: base,
+        currency: currency,
+        purchased_at: year + '-' + month + '-01'
+      };
+      await (0, _index.changePurchase)(newPurchase, id);
+      dispatch(updatePurchaseSuccess());
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
+var updatePurchaseSuccess = function updatePurchaseSuccess() {
+  return {
+    type: 'UPDATE_PURCHASE'
+  };
+};
+
+var deletePurchase = function deletePurchase(id) {
+  return async function (dispatch) {
+    try {
+      await (0, _index.delPurchase)(id);
+      dispatch(deletePurchaseSuccess());
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
+var deletePurchaseSuccess = function deletePurchaseSuccess() {
+  return {
+    type: 'DELETE_PURCHASE'
+  };
+};
+
+exports.getPrice = getPrice;
+exports.addPurchase = addPurchase;
+exports.selectYear = selectYear;
+exports.selectMonth = selectMonth;
+exports.selectBase = selectBase;
+exports.selectCurrency = selectCurrency;
+exports.selectPurchase = selectPurchase;
+exports.updatePurchase = updatePurchase;
+exports.deletePurchase = deletePurchase;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -840,7 +977,7 @@ var ExecutionEnvironment = {
 module.exports = ExecutionEnvironment;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -921,7 +1058,7 @@ module.exports = EventListener;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -963,7 +1100,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 module.exports = getActiveElement;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1034,7 +1171,7 @@ function shallowEqual(objA, objB) {
 module.exports = shallowEqual;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1077,7 +1214,7 @@ function containsNode(outerNode, innerNode) {
 module.exports = containsNode;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1107,7 +1244,7 @@ function focusNode(node) {
 module.exports = focusNode;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1131,7 +1268,7 @@ var storeShape = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape({
 });
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1143,7 +1280,7 @@ var storeShape = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_Subscription__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_PropTypes__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_PropTypes__ = __webpack_require__(20);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1436,17 +1573,17 @@ selectorFactory) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(22);
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__combineReducers__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(26);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createStore", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "combineReducers", function() { return __WEBPACK_IMPORTED_MODULE_1__combineReducers__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "bindActionCreators", function() { return __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__["a"]; });
@@ -1473,7 +1610,7 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1731,7 +1868,7 @@ var ActionTypes = {
 }
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1745,7 +1882,7 @@ var Symbol = __WEBPACK_IMPORTED_MODULE_0__root_js__["a" /* default */].Symbol;
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1772,7 +1909,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1800,7 +1937,7 @@ function warning(message) {
 }
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1839,14 +1976,14 @@ function compose() {
 }
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = wrapMapToPropsConstant;
 /* unused harmony export getDependsOnOwnProps */
 /* harmony export (immutable) */ __webpack_exports__["b"] = wrapMapToPropsFunc;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(29);
 
 
 function wrapMapToPropsConstant(getConstant) {
@@ -1917,7 +2054,7 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1932,125 +2069,6 @@ function verifyPlainObject(value, displayName, methodName) {
     Object(__WEBPACK_IMPORTED_MODULE_1__warning__["a" /* default */])(methodName + '() in ' + displayName + ' must return a plain object. Instead received ' + value + '.');
   }
 }
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.updatePurchase = exports.selectPurchase = exports.selectCurrency = exports.selectBase = exports.selectMonth = exports.selectYear = exports.addPurchase = exports.getPrice = undefined;
-
-var _index = __webpack_require__(30);
-
-var getPrice = function getPrice() {
-  return async function (dispatch) {
-    try {
-      var prices = await (0, _index.getPricePromise)();
-      dispatch(getPriceSuccess(prices));
-    } catch (err) {
-      console.error(err);
-    }
-  };
-};
-
-var getPriceSuccess = function getPriceSuccess(prices) {
-  return {
-    type: 'GET_PRICE',
-    prices: prices
-  };
-};
-
-var selectYear = function selectYear(selectedYear) {
-  return {
-    type: 'SELECT_YEAR',
-    selectedYear: selectedYear
-  };
-};
-var selectMonth = function selectMonth(selectedMonth) {
-  return {
-    type: 'SELECT_MONTH',
-    selectedMonth: selectedMonth
-  };
-};
-
-var selectBase = function selectBase(selectedBase) {
-  return {
-    type: 'SELECT_BASE',
-    selectedBase: selectedBase
-  };
-};
-
-var selectCurrency = function selectCurrency(selectedCurrency) {
-  return {
-    type: 'SELECT_CURRENCY',
-    selectedCurrency: selectedCurrency
-  };
-};
-
-var addPurchase = function addPurchase(year, month, base, currency) {
-  return async function (dispatch) {
-    try {
-      var newPurchase = {
-        base: base,
-        currency: currency,
-        purchased_at: year + '-' + month + '-01'
-      };
-      await (0, _index.savePurchase)(newPurchase);
-      dispatch(addPurchaseSuccess());
-    } catch (err) {
-      console.error(err);
-    }
-  };
-};
-
-var addPurchaseSuccess = function addPurchaseSuccess() {
-  return {
-    type: 'ADD_PURCHASE'
-  };
-};
-
-var selectPurchase = function selectPurchase(selectedPurchase) {
-  return {
-    type: 'SELECT_PURCHASE',
-    selectedPurchase: selectedPurchase
-  };
-};
-
-var updatePurchase = function updatePurchase(year, month, base, currency, id) {
-  return async function (dispatch) {
-    try {
-      var newPurchase = {
-        base: base,
-        currency: currency,
-        purchased_at: year + '-' + month + '-01'
-      };
-      await (0, _index.changePurchase)(newPurchase, id);
-      dispatch(updatePurchaseSuccess());
-    } catch (err) {
-      console.error(err);
-    }
-  };
-};
-
-var updatePurchaseSuccess = function updatePurchaseSuccess() {
-  return {
-    type: 'UPDATE_PURCHASE'
-  };
-};
-
-exports.getPrice = getPrice;
-exports.addPurchase = addPurchase;
-exports.selectYear = selectYear;
-exports.selectMonth = selectMonth;
-exports.selectBase = selectBase;
-exports.selectCurrency = selectCurrency;
-exports.selectPurchase = selectPurchase;
-exports.updatePurchase = updatePurchase;
 
 /***/ }),
 /* 30 */
@@ -2101,9 +2119,16 @@ var changePurchase = function changePurchase(purchase, id) {
   });
 };
 
+var delPurchase = function delPurchase(id) {
+  fetch('/api/purchases/' + id, {
+    method: 'DELETE'
+  });
+};
+
 exports.getPricePromise = getPricePromise;
 exports.savePurchase = savePurchase;
 exports.changePurchase = changePurchase;
+exports.delPurchase = delPurchase;
 
 /***/ }),
 /* 31 */
@@ -2122,7 +2147,7 @@ var _Form = __webpack_require__(77);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _index = __webpack_require__(29);
+var _index = __webpack_require__(13);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2183,7 +2208,7 @@ var _reduxThunk = __webpack_require__(71);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _redux = __webpack_require__(21);
+var _redux = __webpack_require__(22);
 
 var _index = __webpack_require__(72);
 
@@ -3660,7 +3685,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(1),l=__webpack_require__(13),B=__webpack_require__(4),C=__webpack_require__(2),ba=__webpack_require__(14),da=__webpack_require__(15),ea=__webpack_require__(16),fa=__webpack_require__(17),ia=__webpack_require__(18),D=__webpack_require__(7);
+var aa=__webpack_require__(1),l=__webpack_require__(14),B=__webpack_require__(4),C=__webpack_require__(2),ba=__webpack_require__(15),da=__webpack_require__(16),ea=__webpack_require__(17),fa=__webpack_require__(18),ia=__webpack_require__(19),D=__webpack_require__(7);
 function E(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:E("227");
 var oa={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function pa(a,b){return(a&b)===b}
 var ta={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=ta,c=a.Properties||{},d=a.DOMAttributeNamespaces||{},e=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in c){ua.hasOwnProperty(f)?E("48",f):void 0;var g=f.toLowerCase(),h=c[f];g={attributeName:g,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:pa(h,b.MUST_USE_PROPERTY),
@@ -3960,14 +3985,14 @@ if (process.env.NODE_ENV !== "production") {
 var React = __webpack_require__(1);
 var invariant = __webpack_require__(5);
 var warning = __webpack_require__(8);
-var ExecutionEnvironment = __webpack_require__(13);
+var ExecutionEnvironment = __webpack_require__(14);
 var _assign = __webpack_require__(4);
 var emptyFunction = __webpack_require__(2);
-var EventListener = __webpack_require__(14);
-var getActiveElement = __webpack_require__(15);
-var shallowEqual = __webpack_require__(16);
-var containsNode = __webpack_require__(17);
-var focusNode = __webpack_require__(18);
+var EventListener = __webpack_require__(15);
+var getActiveElement = __webpack_require__(16);
+var shallowEqual = __webpack_require__(17);
+var containsNode = __webpack_require__(18);
+var focusNode = __webpack_require__(19);
 var emptyObject = __webpack_require__(7);
 var checkPropTypes = __webpack_require__(9);
 var hyphenateStyleName = __webpack_require__(40);
@@ -19503,7 +19528,7 @@ module.exports = camelize;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_PropTypes__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_PropTypes__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_warning__ = __webpack_require__(11);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -20430,7 +20455,7 @@ var Subscription = function () {
 
 "use strict";
 /* unused harmony export createConnect */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_connectAdvanced__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_connectAdvanced__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_shallowEqual__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mapDispatchToProps__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mapStateToProps__ = __webpack_require__(67);
@@ -20585,8 +20610,8 @@ function shallowEqual(objA, objB) {
 /* unused harmony export whenMapDispatchToPropsIsFunction */
 /* unused harmony export whenMapDispatchToPropsIsMissing */
 /* unused harmony export whenMapDispatchToPropsIsObject */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(28);
 
 
 
@@ -20613,7 +20638,7 @@ function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(57);
 
@@ -20673,14 +20698,14 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 
 /* harmony default export */ __webpack_exports__["a"] = (freeGlobal);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(24)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(25)))
 
 /***/ }),
 /* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(24);
 
 
 /** Used for built-in method references. */
@@ -20856,7 +20881,7 @@ if (typeof self !== 'undefined') {
 var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(24), __webpack_require__(62)(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(25), __webpack_require__(62)(module)))
 
 /***/ }),
 /* 62 */
@@ -20919,9 +20944,9 @@ function symbolObservablePonyfill(root) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = combineReducers;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_isPlainObject__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_warning__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_warning__ = __webpack_require__(26);
 
 
 
@@ -21114,7 +21139,7 @@ function bindActionCreators(actionCreators, dispatch) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = applyMiddleware;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__compose__ = __webpack_require__(27);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -21171,7 +21196,7 @@ function applyMiddleware() {
 "use strict";
 /* unused harmony export whenMapStateToPropsIsFunction */
 /* unused harmony export whenMapStateToPropsIsMissing */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrapMapToProps__ = __webpack_require__(28);
 
 
 function whenMapStateToPropsIsFunction(mapStateToProps) {
@@ -21195,7 +21220,7 @@ function whenMapStateToPropsIsMissing(mapStateToProps) {
 /* unused harmony export wrapMergePropsFunc */
 /* unused harmony export whenMergePropsIsFunction */
 /* unused harmony export whenMergePropsIsOmitted */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_verifyPlainObject__ = __webpack_require__(29);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -21467,6 +21492,12 @@ var reducer = function reducer() {
           currentView: 'AllPurchases'
         });
       }
+    case 'DELETE_PURCHASE':
+      {
+        return Object.assign({}, state, {
+          currentView: 'AllPurchases'
+        });
+      }
     case 'SELECT_YEAR':
       {
         return Object.assign({}, state, {
@@ -21618,7 +21649,7 @@ var _AllPurchases = __webpack_require__(76);
 
 var _AllPurchases2 = _interopRequireDefault(_AllPurchases);
 
-var _index = __webpack_require__(29);
+var _index = __webpack_require__(13);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22010,6 +22041,8 @@ var _SinglePurchase = __webpack_require__(79);
 
 var _SinglePurchase2 = _interopRequireDefault(_SinglePurchase);
 
+var _index = __webpack_require__(13);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -22018,7 +22051,15 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(_SinglePurchase2.default);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    deletePurchase: function deletePurchase(id) {
+      dispatch((0, _index.deletePurchase)(id));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_SinglePurchase2.default);
 
 /***/ }),
 /* 79 */
@@ -22065,6 +22106,8 @@ var SinglePurchase = function (_Component) {
   _createClass(SinglePurchase, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         { className: 'SinglePurchase' },
@@ -22084,7 +22127,16 @@ var SinglePurchase = function (_Component) {
             this.props.selectedPurchase.data.currency
           )
         ),
-        _react2.default.createElement(_Form2.default, null)
+        _react2.default.createElement(_Form2.default, null),
+        _react2.default.createElement(
+          'button',
+          {
+            onClick: function onClick() {
+              _this2.props.deletePurchase(_this2.props.selectedPurchase.id);
+            }
+          },
+          'Delete'
+        )
       );
     }
   }]);

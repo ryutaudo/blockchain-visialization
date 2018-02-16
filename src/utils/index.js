@@ -24,7 +24,7 @@ const savePurchase = (purchase) => {
       'Content-Type': 'application/json'
     }),
   });
-}
+};
 
 const changePurchase = (purchase, id) => {
   fetch(`/api/purchases/${id}`, {
@@ -34,6 +34,13 @@ const changePurchase = (purchase, id) => {
       'Content-Type': 'application/json'
     }),
   });
+};
+
+
+const delPurchase = id => {
+  fetch(`/api/purchases/${id}`, {
+    method: 'DELETE',
+  });
 }
 
-export { getPricePromise, savePurchase, changePurchase };
+export { getPricePromise, savePurchase, changePurchase, delPurchase };
