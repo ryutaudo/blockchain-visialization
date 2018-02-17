@@ -21,7 +21,7 @@ class AllPurchases extends Component {
             >
               <p>{price.data.base}</p>
               <p>{price.data.amount} {price.data.currency}</p>
-              <SampleChart />
+              <SampleChart base={price.data.base}/>
             </div>
           );
         })}
