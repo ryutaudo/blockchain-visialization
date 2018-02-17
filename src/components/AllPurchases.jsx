@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import SampleChart from './LineChart';
 
 class AllPurchases extends Component {
 
@@ -20,6 +21,7 @@ class AllPurchases extends Component {
             >
               <p>{price.data.base}</p>
               <p>{price.data.amount} {price.data.currency}</p>
+              <SampleChart />
             </div>
           );
         })}
