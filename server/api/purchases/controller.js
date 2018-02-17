@@ -34,7 +34,7 @@ const deletePurchase = async (req, res) => {
     .table('purchases')
     .where({ id })
     .delete();
-  send(res, 200, updateResult, false);
+  send(res, 200, deleteResult, false);
 }
 
 export { getPurchases, addPurchase, updatePurchase, deletePurchase };
