@@ -8,12 +8,12 @@ import PurchaseForm from '../containers/PurchaseForm';
 class App extends Component {
   get currentView() {
     if (this.props.currentView === 'SinglePurchase') {
-      return <SinglePurchase />
+      return <SinglePurchase />;
     }
     if (this.props.currentView === 'AddPurchase') {
-      return <PurchaseForm />
+      return <PurchaseForm />;
     }
-    return <AllPurchases />
+    return <AllPurchases />;
   }
 
   render() {

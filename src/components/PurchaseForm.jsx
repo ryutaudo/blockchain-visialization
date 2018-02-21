@@ -28,7 +28,7 @@ class PurchaseForm extends Component {
         this.props.selectedYear,
         this.props.selectedMonth,
         this.props.selectedBase,
-        this.props.selectedCurrency,
+        this.props.selectedCurrency
       );
     }
     return this.props.updatePurchase(
@@ -36,7 +36,7 @@ class PurchaseForm extends Component {
       this.props.selectedMonth,
       this.props.selectedBase,
       this.props.selectedCurrency,
-      this.props.selectedPurchase.id,
+      this.props.selectedPurchase.id
     );
   }
 

@@ -34,11 +34,11 @@ module.exports = {
     extensions: ['.webpack.js', '.js', '.jsx'],
   },
   devServer: {
-    contentBase: path.join(__dirname, "public"),
+    contentBase: path.join(__dirname, 'public'),
     compress: true,
     port: 3000,
     proxy: {
-      "/api": "http://localhost:9000"
+      '/api': 'http://localhost:9000'
     }
   },
 };

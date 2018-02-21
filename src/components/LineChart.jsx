@@ -10,14 +10,14 @@ class SampleChart extends Component {
     } else if (this.props.base === 'ETH') {
       data = ether;
     } else {
-      data = lightcoin
+      data = lightcoin;
     }
 
     return (
       <LineChart width={1000} height={200} data={data}>
         <Line type="monotone" dataKey="price" stroke="#8884d8" />
       </LineChart>
-    )
+    );
   }
 }
 
