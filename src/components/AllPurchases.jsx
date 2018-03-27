@@ -22,7 +22,7 @@ class AllPurchases extends Component {
 								<CardTitle>{price.data.base}</CardTitle>
 								<CardSubtitle>{price.data.amount} {price.data.currency}</CardSubtitle>
 								<SampleChart base={price.data.base}/>
-								<Button onClick={() => this.props.selectPurchase(price)} >Update</Button>
+								<Button color="primary" onClick={() => this.props.selectPurchase(price)} >Update</Button>
 							</CardBody>
 						</Card>
 					);
