@@ -18,10 +18,10 @@ class AllPurchases extends Component {
 				{this.props.prices.map(price => {
 					return (
 						<Card className="price card" key={price.id}>
-							<SampleChart base={price.data.base}/>
 							<CardBody>
 								<CardTitle>{price.data.base}</CardTitle>
 								<CardSubtitle>{price.data.amount} {price.data.currency}</CardSubtitle>
+								<SampleChart base={price.data.base}/>
 								<Button onClick={() => this.props.selectPurchase(price)} >Update</Button>
 							</CardBody>
 						</Card>

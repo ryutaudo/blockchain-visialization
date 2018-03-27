@@ -52885,7 +52885,6 @@ var AllPurchases = function (_Component) {
 					return _react2.default.createElement(
 						_reactstrap.Card,
 						{ className: 'price card', key: price.id },
-						_react2.default.createElement(_LineChart2.default, { base: price.data.base }),
 						_react2.default.createElement(
 							_reactstrap.CardBody,
 							null,
@@ -52901,6 +52900,7 @@ var AllPurchases = function (_Component) {
 								' ',
 								price.data.currency
 							),
+							_react2.default.createElement(_LineChart2.default, { base: price.data.base }),
 							_react2.default.createElement(
 								_reactstrap.Button,
 								{ onClick: function onClick() {
@@ -52971,8 +52971,12 @@ var SampleChart = function (_Component) {
 
 			return _react2.default.createElement(
 				_recharts.LineChart,
-				{ width: 1000, height: 200, data: data },
-				_react2.default.createElement(_recharts.Line, { type: 'monotone', dataKey: 'price', stroke: '#8884d8' })
+				{ width: 600, height: 200, data: data, margin: { top: 5, right: 20, bottom: 5, left: 0 } },
+				_react2.default.createElement(_recharts.Line, { type: 'monotone', dataKey: 'price', stroke: '#8884d8' }),
+				_react2.default.createElement(_recharts.CartesianGrid, { stroke: '#ccc', strokeDasharray: '5 5' }),
+				_react2.default.createElement(_recharts.XAxis, { dataKey: 'name' }),
+				_react2.default.createElement(_recharts.YAxis, null),
+				_react2.default.createElement(_recharts.Tooltip, null)
 			);
 		}
 	}]);
@@ -68048,7 +68052,7 @@ exports = module.exports = __webpack_require__(91)(false);
 
 
 // module
-exports.push([module.i, ".card {\n  width: 30rem;\n}", ""]);
+exports.push([module.i, ".card {\n  width: 50rem;\n  margin: 5px auto 5px auto;\n  padding: 5px\n}", ""]);
 
 // exports
 
