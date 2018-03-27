@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
 import SampleChart from './LineChart';
 
+import '../assets/css/AllPurchases.css';
+
 class AllPurchases extends Component {
 
 	componentDidMount() {
@@ -15,7 +17,7 @@ class AllPurchases extends Component {
 			<div className="price-container">
 				{this.props.prices.map(price => {
 					return (
-						<Card className="price" key={price.id}>
+						<Card className="price card" key={price.id}>
 							<SampleChart base={price.data.base}/>
 							<CardBody>
 								<CardTitle>{price.data.base}</CardTitle>
