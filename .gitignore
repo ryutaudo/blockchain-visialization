@@ -64,5 +64,5 @@ build/
 # Mac
 .DS_Store
 
-bundle.js
-bundle.js.map
+public/bundle.js
+public/bundle.js.map
