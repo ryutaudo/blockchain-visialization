@@ -43,6 +43,7 @@ const addPurchase = (year, month, base, currency) => {
         currency,
         purchased_at: `${year}-${month}-01`
       };
+      console.log('add purchase: ', newPurchase)
       await savePurchase(newPurchase);
       dispatch(addPurchaseSuccess());
     } catch(err) {
@@ -99,6 +100,10 @@ const goAddForm = () => ({
   type: 'GO_ADDFORM',
 });
 
+const toggleAddForm = () => ({
+  type: 'TOGGLE_ADD_FORM'
+});
+
 export {
   getPrice,
   addPurchase,
@@ -110,4 +115,5 @@ export {
   updatePurchase,
   deletePurchase,
   goAddForm,
+  toggleAddForm,
 };

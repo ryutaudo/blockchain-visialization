@@ -6,9 +6,11 @@ const defaultState = {
 	selectedCurrency: undefined,
 	selectedPurchase: undefined,
 	currentView: 'AllPurchases',
+	modalAddForm: false,
 };
 
 const reducer = (state = defaultState, action) => {
+  console.log(state);
 	switch(action.type) {
 	case 'GET_PRICE': {
 		return Object.assign({}, state, {
@@ -69,6 +71,13 @@ const reducer = (state = defaultState, action) => {
 			currentView: 'AddPurchase',
 		});
 	}
+  
+	case 'TOGGLE_ADD_FORM': {
+		return Object.assign({}, state, {
+			modalAddForm: !state.modalAddForm,
+		});
+	}
+
 	default:
 		return state;
 	}

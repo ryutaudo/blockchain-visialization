@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
 import SampleChart from './LineChart';
+import UpdateFormModal from '../containers/UpdateFormModal';
 
 import '../assets/css/AllPurchases.css';
 
