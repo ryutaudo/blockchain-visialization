@@ -1,5 +1,7 @@
 # Project: CCCimulate
 An app is to simulate the prices of cryptocurrency.
+https://user-images.githubusercontent.com/18551862/38124801-a0246f0c-341f-11e8-85d7-bab46c623d41.png
+
 
 ## Environment Setup
 ### Installing Node
